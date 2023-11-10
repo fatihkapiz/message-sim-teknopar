@@ -4,12 +4,16 @@ The table can then be saved as a PDF file or XLSX file.
 
 # startup
 The application must be started using http-server
+
+To install http server, run:
+```npm install -g http-server```
+
 to start http server
   1. clone the application
   2. go to the application directory
-  3. run http-server .
+  3. run:
+  ```http-server .```
 
-npm install http-server
 
 
 # Used Libraries
