@@ -9,9 +9,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const selectAll = document.getElementById("select-all");
     const sendAll = document.getElementById("send-all");
+    const deselectAll = document.getElementById("deselect-all");
 
-    selectAll.onclick = function() { selectAll(); }
-    sendAll.onclick = function() { sendAll(); }
+    selectAll.onclick = function() { SelectAll(); }
+    sendAll.onclick = function() { SendAll(); }
+    deselectAll.onclick = function() { DeselectAll(); }
     // Fetch data from data.json file
     fetch('data.json')
         .then(response => response.json())
@@ -43,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 checkbox.type = "checkbox";
                 card.appendChild(checkbox);
                 const holder = document.createElement("div");
+                holder.classList.add("holder-div");
                 
                 checkbox.onclick = function () {
                     if (checkbox.checked) {
@@ -195,12 +198,43 @@ document.addEventListener("DOMContentLoaded", function () {
         })
 });
 
+function DeselectAll() {
+    console.log("select all clicked");
+
+    // Get all checkbox elements
+    var checkboxElements = document.querySelectorAll('input[type="checkbox"]');
+
+    // Iterate through the input holder containers and make them visible
+    checkboxElements.forEach(function(checkbox) {
+        checkbox.checked = false;
+        var holderCards = document.querySelectorAll('.holder-div');
+        holderCards.forEach(function(item) {
+            item.style.display = "none";
+        })
+        console.log(checkbox);
+    });
+}
+
 function SelectAll() {
+    console.log("select all clicked");
+
+    // Get all checkbox elements
+    var checkboxElements = document.querySelectorAll('input[type="checkbox"]');
+
+    // Iterate through the input holder containers and make them visible
+    checkboxElements.forEach(function(checkbox) {
+        checkbox.checked = true;
+        var holderCards = document.querySelectorAll('.holder-div');
+        holderCards.forEach(function(item) {
+            item.style.display = "grid";
+        })
+        console.log(checkbox);
+    });
 
 }
 
 function SendAll() {
-    
+
 }
 
 function ClearTable(e) {
