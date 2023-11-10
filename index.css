@@ -1,0 +1,8 @@
+#selectButton {
+  height: 2em;
+  width: 2em;
+}
+
+.navbar-nav {
+  flex-direction: row;
+}

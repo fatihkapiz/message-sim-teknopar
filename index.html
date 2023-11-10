@@ -6,16 +6,42 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
     <script type="text/javascript" src="./index.js" defer></script>
     <title>Hello, world!</title>
   </head>
   <body>
-    <div class="container">
-      <div id="message-list">
-        list
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Send Message</a>
+          </li>
+        </ul>
       </div>
-      <h1>Hello, world!</h1>
-      
+    </nav>
+    <div class="container">
+      <div id="table-div">
+        <table class="table" id="table">
+          <thead>
+            <tr>
+              <th scope="col" id="title">Title</th>
+              <th scope="col" id="desc">Description</th>
+              <th scope="col" id="cat">Category</th>
+              <th scope="col" id="th1">Column 1</th>
+              <th scope="col" id="th2">Column 2</th>
+              <th scope="col" id="th3">Column 3</th>
+              <th scope="col" id="th4">Column 4</th>
+              <th scope="col" id="th5">Column 5</th>
+            </tr>
+          </thead>
+          <tbody id="main-table">
+            
+          </tbody>
+        </table>
+      </div>
+      <div id="message-list">
+      </div>      
     </div>
 
   </body>
