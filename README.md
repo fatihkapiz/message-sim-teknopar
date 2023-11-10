@@ -21,11 +21,11 @@ to start http server
 2. XLSX library to save the table as an XLSX file
 
 # Functions in the Application
-1. AddMessage() // Implemented
-2. ClearTable() // Implemented
+1. AddMessage() [//]: # (Implemented)
+2. ClearTable() [//]: # (Implemented)
 3. SendAll() // Not implemented properly yet
-4. SelectAll()  // Implemented
-5. DeselectAll()  // Implemented
+4. SelectAll()  [//]: # (Implemented)
+5. DeselectAll()  [//]: # (Implemented)
 
 # Notes and Program Logic
 1. fetch api was used to load the data.json file into an array messages
