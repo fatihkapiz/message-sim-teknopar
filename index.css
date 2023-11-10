@@ -6,3 +6,8 @@
 .navbar-nav {
   flex-direction: row;
 }
+
+.card-container {
+  border: 2px solid black;
+  border-radius: 25px;
+}

@@ -4,7 +4,14 @@ function tester() {
 
 document.addEventListener("DOMContentLoaded", function () {
     const messageList = document.getElementById("message-list");
+    const clearButton = document.getElementById("clear");
+    clearButton.onclick = function() { ClearTable(); }
 
+    const selectAll = document.getElementById("select-all");
+    const sendAll = document.getElementById("send-all");
+
+    selectAll.onclick = function() { selectAll(); }
+    sendAll.onclick = function() { sendAll(); }
     // Fetch data from data.json file
     fetch('data.json')
         .then(response => response.json())
@@ -20,25 +27,31 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (fa > fb) {
                     return 1;
                 }
-            });
+            }); 
 
             data.data.forEach(item => {
                 // Create a card for each data item
                 const card = document.createElement("div");
-                card.setAttribute("id", "iterativeCard");
-                card.classList.add("card-conteiner");
+                card.classList.add("card-container");
                 card.innerHTML = `
                 <h3>${item.title}</h3>
                 <p>${item.description}</p>
                 <p>Category: ${item.category}</p>
                 `;
 
-                const btn1 = document.createElement("input");
-                btn1.type = "checkbox";
-                card.appendChild(btn1);
-                const former = document.createElement("form");
-                former.method = "PUT";
-
+                const checkbox = document.createElement("input");
+                checkbox.type = "checkbox";
+                card.appendChild(checkbox);
+                const holder = document.createElement("div");
+                
+                checkbox.onclick = function () {
+                    if (checkbox.checked) {
+                        console.log("tıklandı");
+                        holder.style.display = "grid";
+                    } else {
+                        holder.style.display = "none";
+                    }
+                };
 
                 if (item.category === "A") {
                     console.log("category A");
@@ -49,126 +62,131 @@ document.addEventListener("DOMContentLoaded", function () {
                     const inp4 = document.createElement("input");
                     const submitbtn = document.createElement("input");
                     submitbtn.type = "submit";
+                    submitbtn.value = "Submit";
+                    holder.appendChild(inp1);
+                    holder.appendChild(inp2);
+                    holder.appendChild(inp3);
+                    holder.appendChild(inp4);
+                    holder.appendChild(submitbtn)
+                    holder.style.display = "none";
+                    card.appendChild(holder);
 
-                    former.appendChild(inp1);
-                    former.appendChild(inp2);
-                    former.appendChild(inp3);
-                    former.appendChild(inp4);
-                    former.appendChild(submitbtn)
-                    card.appendChild(former);
-                    former.style.display = "none";
 
-                    const sentData = {
-                        title: item.title,
-                        description: item.description,
-                        category: item.category,
-                        col1: inp1.value,
-                        col2: inp2.value,
-                        col3: inp3.value,
-                        col4: inp4.value,
-                        col5: ""
-                    }
-
-                    former.onsubmit = function(e) {
-                        e.preventDefault();
-                        sentData.col1 = inp1.value;
-                        sentData.col2 = inp2.value;
-                        sentData.col3 = inp3.value;
-                        sentData.col4 = inp4.value;
-                        sentData.col5 = inp5.value;
-                        AddMessage(sentData);
-                        return false;
-                    }
-
-                    btn1.onclick = function () {
-                        if (btn1.checked) {
-                            console.log("tıklandı");
-                            former.style.display = "grid";
-                        } else {
-                            former.style.display = "none";
+                    // add onclick functionality to submit button
+                    submitbtn.onclick = function(e) {
+                        const sentData = {
+                            title: item.title,
+                            description: item.description,
+                            category: item.category,
+                            col1: inp1.value,
+                            col2: inp2.value,
+                            col3: inp3.value,
+                            col4: inp4.value,
+                            col5: ""
                         }
-                    };
+                        // check if the input is not full
+                        if (!(sentData.col1 != "" && sentData.col2 != ""  && sentData.col3 != "" && sentData.col4 != "")) {
+                            alert("empty input field");
+                            return false;
+                        }
+                        // send message if above doesn't return false
+                        AddMessage(sentData);
+                    }
                 }
                 else if (item.category === "B") {
                     const inp1 = document.createElement("input");
-                    const former = document.createElement("form");
 
-                    former.appendChild(inp1);
+                    holder.appendChild(inp1);
                     const submitbtn = document.createElement("input");
                     submitbtn.type = "submit";
-                    former.appendChild(submitbtn)
-                    card.appendChild(former);
-                    former.style.display = "none";
+                    holder.appendChild(submitbtn)
+                    holder.style.display = "none";
+                    card.appendChild(holder);
 
-                    const sentData = {
-                        title: item.title,
-                        description: item.description,
-                        category: item.category,
-                        col1: inp1.value,
-                        col2: "",
-                        col3: "",
-                        col4: "",
-                        col5: ""
-                    }
-
-                    former.onsubmit = function() { return AddMessage(sentData); }
-
-                    btn1.onclick = function () {
-                        if (btn1.checked) {
-                            console.log("tıklandı");
-                            former.style.display = "grid";
-                        } else {
-                            former.style.display = "none";
+                    submitbtn.onclick = function(e) { 
+                        const sentData = {
+                            title: item.title,
+                            description: item.description,
+                            category: item.category,
+                            col1: inp1.value,
+                            col2: "",
+                            col3: "",
+                            col4: "",
+                            col5: ""
                         }
-                    };
+                        // check if the input is not full
+                        if (!(sentData.col1 != "")) {
+                            alert("empty input field");
+                            return false;
+                        }
+                        // send message if above doesn't return false
+                        AddMessage(sentData);
+                    }
                 }
                 else if (item.category === "A-B") {
-                    console.log("category A");
+                    console.log("category A-B");
 
                     const inp1 = document.createElement("input");
                     const inp2 = document.createElement("input");
                     const inp3 = document.createElement("input");
                     const inp4 = document.createElement("input");
                     const inp5 = document.createElement("input");
-                    const former = document.createElement("form");
-                    const submitbtn = document.createElement("input");
-                    submitbtn.type = "submit";
+                    const submitbtn = document.createElement("button");
 
-                    former.appendChild(inp1);
-                    former.appendChild(inp2);
-                    former.appendChild(inp3);
-                    former.appendChild(inp4);
-                    former.appendChild(inp5);
-                    former.appendChild(submitbtn)
+                    holder.appendChild(inp1);
+                    holder.appendChild(inp2);
+                    holder.appendChild(inp3);
+                    holder.appendChild(inp4);
+                    holder.appendChild(inp5);
+                    holder.appendChild(submitbtn)
 
-                    card.appendChild(former);
-                    former.style.display = "none";
+                    holder.style.display = "none";
+                    card.appendChild(holder);
 
-
-                    const sentData = {
-                        title: item.title,
-                        description: item.description,
-                        category: item.category,
-                        col1: inp1.value,
-                        col2: "",
-                        col3: "",
-                        col4: "",
-                        col5: ""
-                    }
-
-                    former.onsubmit = function() { return AddMessage(sentData); }
-
-                    btn1.onclick = function () {
-                        if (btn1.checked) {
-                            console.log("tıklandı");
-                            former.style.display = "grid";
-                        } else {
-                            former.style.display = "none";
+                    submitbtn.onclick = function(e) {
+                        const sentData = {
+                            title: item.title,
+                            description: item.description,
+                            category: item.category,
+                            col1: inp1.value,
+                            col2: inp2.value,
+                            col3: inp3.value,
+                            col4: inp4.value,
+                            col5: inp5.value
                         }
-                    };
+                        // check if the input is not full
+                        if (!(sentData.col1 != "" && sentData.col2 != ""  && sentData.col3 != "" && sentData.col4 != "" && sendData.col5 != "")) {
+                            alert("empty input field");
+                            return false;
+                        }
+                        // send message if above doesn't return false
+                        AddMessage(sentData);
+                    }
                 }
                 else if (item.category === "NO-A-B") {
+                    console.log("no-a-b");
+                    const submitbtn = document.createElement("button");
+                    submitbtn.innerText = "Submit";
+                    submitbtn.style.height = "2em";
+                    holder.appendChild(submitbtn);
+                    holder.style.display = "none";
+                    card.appendChild(holder);
 
+                    submitbtn.onclick = function(e) {
+                        const sentData = {
+                            title: item.title,
+                            description: item.description,
+                            category: item.category,
+                            col1: "",
+                            col2: "",
+                            col3: "",
+                            col4: "",
+                            col5: ""
+                        }
+
+                        // send message if above doesn't return false
+                        AddMessage(sentData);
+                    }
                 }
 
                 // Append the card to the visualization container
@@ -177,37 +195,63 @@ document.addEventListener("DOMContentLoaded", function () {
         })
 });
 
-function AddMessage(newData) {
-    const table = document.querySelector("#table");
-    console.log(table);
-    console.log(newData);
-    const row = document.createElement("tr");
-    const title = document.createElement("td");
-    const descr = document.createElement("descr");
-    const cat = document.createElement("cat");
-    const d1 = document.createElement("d1");
-    const d2 = document.createElement("d2");
-    const d3 = document.createElement("d3");
-    const d4 = document.createElement("d4");
-    const d5 = document.createElement("d5");
+function SelectAll() {
 
-    row.appendChild(title);
-    row.appendChild(descr);
-    row.appendChild(cat);
-    row.appendChild(d1);
-    row.appendChild(d2);
-    row.appendChild(d3);
-    row.appendChild(d4);
-    row.appendChild(d5);
+}
 
-    title.innerText = newData.title;
-    descr.innerText = newData.descr;
-    cat.innerText = newData.cat;
-    d1.innerText = newData.col1;
-    d2.innerText = newData.col2;
-    d3.innerText = newData.col3;
-    d4.innerText = newData.col4;
-    d5.innerText = newdata.col5;
+function SendAll() {
+    
+}
 
-    return false;
+function ClearTable(e) {
+    messageTable = document.getElementById("message-table");
+    messageTable.innerHTML = `
+    <thead><tr><th scope="col" id="title">Title</th>
+    <th scope="col" id="desc">Description</th>
+      <th scope="col" id="cat">Category</th>
+      <th scope="col" id="th1">Column 1</th>
+      <th scope="col" id="th2">Column 2</th>
+      <th scope="col" id="th3">Column 3</th>
+      <th scope="col" id="th4">Column 4</th>
+      <th scope="col" id="th5">Column 5</th>
+    </tr>
+  </thead>
+  <tbody id="main-table">
+    
+  </tbody>
+  `;
+}
+
+function AddMessage(message) {
+    messageTable = document.getElementById("message-table");
+
+    row = document.createElement("tr");
+    tit = document.createElement("td");
+    descr = document.createElement("td");
+    cat = document.createElement("td");
+    col1 = document.createElement("td");
+    col2 = document.createElement("td");
+    col3 = document.createElement("td");
+    col4 = document.createElement("td");
+    col5 = document.createElement("td");
+
+    row.appendChild(tit)
+    row.appendChild(descr)
+    row.appendChild(cat)
+    row.appendChild(col1)
+    row.appendChild(col2)
+    row.appendChild(col3)
+    row.appendChild(col4)
+    row.appendChild(col5)
+
+    tit.innerText = message.title;
+    descr.innerText = message.description;
+    cat.innerHTML = message.category;
+    col1.innerHTML = message.col1;
+    col2.innerHTML = message.col2;
+    col3.innerHTML = message.col3;
+    col4.innerHTML = message.col4;
+    col5.innerHTML = message.col5;
+
+    messageTable.appendChild(row);
 }

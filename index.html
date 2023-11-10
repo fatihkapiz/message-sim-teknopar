@@ -22,7 +22,7 @@
     </nav>
     <div class="container">
       <div id="table-div">
-        <table class="table" id="table">
+        <table class="table" id="message-table">
           <thead>
             <tr>
               <th scope="col" id="title">Title</th>
@@ -39,7 +39,14 @@
             
           </tbody>
         </table>
+        <button id="clear" type="button" class="btn btn-danger">Clear Table</button>
       </div>
+      <hr style="height:2px;border-width:0;color:black;background-color:black"></hr>
+      <div style="margin-top: 1em;margin-bottom: 1em;">
+        <button id="select-all" class="btn btn-primary">Select All</button>
+        <button id="send-all" class="btn btn-primary">Send All</button>
+      </div>
+      <hr style="height:2px;border-width:0;color:black;background-color:black"></hr>
       <div id="message-list">
       </div>      
     </div>
