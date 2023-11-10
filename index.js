@@ -1,7 +1,3 @@
-function tester() {
-    console.log("fatih");
-}
-
 document.addEventListener("DOMContentLoaded", function () {
     const messageList = document.getElementById("message-list");
     const clearButton = document.getElementById("clear");
@@ -9,6 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const selectAll = document.getElementById("select-all");
     const sendAll = document.getElementById("send-all");
+    console.log(sendAll);
     const deselectAll = document.getElementById("deselect-all");
 
     selectAll.onclick = function() { SelectAll(); }
@@ -60,12 +57,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log("category A");
 
                     const inp1 = document.createElement("input");
+                    inp1.className = "dataInput";
                     const inp2 = document.createElement("input");
+                    inp2.className = "dataInput";
                     const inp3 = document.createElement("input");
+                    inp3.className = "dataInput";
                     const inp4 = document.createElement("input");
+                    inp4.className = "dataInput";
                     const submitbtn = document.createElement("input");
                     submitbtn.type = "submit";
                     submitbtn.value = "Submit";
+                    submitbtn.classList.add("add-message");
                     holder.appendChild(inp1);
                     holder.appendChild(inp2);
                     holder.appendChild(inp3);
@@ -94,14 +96,19 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                         // send message if above doesn't return false
                         AddMessage(sentData);
+
+                        checkbox.checked = false;
+                        holder.style.display = "none";
                     }
                 }
                 else if (item.category === "B") {
                     const inp1 = document.createElement("input");
+                    inp1.className = "dataInput";
 
                     holder.appendChild(inp1);
                     const submitbtn = document.createElement("input");
                     submitbtn.type = "submit";
+                    submitbtn.classList.add("add-message");
                     holder.appendChild(submitbtn)
                     holder.style.display = "none";
                     card.appendChild(holder);
@@ -124,17 +131,31 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                         // send message if above doesn't return false
                         AddMessage(sentData);
+
+                        checkbox.checked = false;
+                        holder.style.display = "none";
                     }
                 }
                 else if (item.category === "A-B") {
                     console.log("category A-B");
 
                     const inp1 = document.createElement("input");
+                    inp1.className = "dataInput";
+
                     const inp2 = document.createElement("input");
+                    inp2.className = "dataInput";
+
                     const inp3 = document.createElement("input");
+                    inp3.className = "dataInput";
+
                     const inp4 = document.createElement("input");
+                    inp4.className = "dataInput";
+
                     const inp5 = document.createElement("input");
+                    inp5.className = "dataInput";
+
                     const submitbtn = document.createElement("button");
+                    submitbtn.classList.add("add-message");
 
                     holder.appendChild(inp1);
                     holder.appendChild(inp2);
@@ -164,6 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                         // send message if above doesn't return false
                         AddMessage(sentData);
+
+                        checkbox.checked = false;
+                        holder.style.display = "none";
                     }
                 }
                 else if (item.category === "NO-A-B") {
@@ -172,6 +196,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     submitbtn.innerText = "Submit";
                     submitbtn.style.height = "2em";
                     holder.appendChild(submitbtn);
+                    submitbtn.classList.add("add-message");
                     holder.style.display = "none";
                     card.appendChild(holder);
 
@@ -189,6 +214,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                         // send message if above doesn't return false
                         AddMessage(sentData);
+
+                        checkbox.checked = false;
+                        holder.style.display = "none";
                     }
                 }
 
@@ -228,13 +256,32 @@ function SelectAll() {
         holderCards.forEach(function(item) {
             item.style.display = "grid";
         })
-        console.log(checkbox);
     });
 
 }
 
 function SendAll() {
+    console.log("send all clicked");
+    var cards = document.querySelectorAll('card-container');
+    console.log(cards);
+    cards.forEach(function(item) {
+        var checkboxElement = item.querySelector('input[type="checkbox"]');
+        if (checkboxElement.checked) {
+            var inputs = item.querySelectorAll("dataInput");
+            const sentData = {
+                title: item.title,
+                description: item.description,
+                category: item.category,
+                col1: inputs[0] || "",
+                col2: inputs[1] || "",
+                col3: inputs[2] || "",
+                col4: inputs[3] || "",
+                col5: inputs[4] || "",
+            }
 
+            AddMessage(sentData);
+        }
+    })
 }
 
 function ClearTable(e) {

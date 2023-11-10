@@ -2,6 +2,16 @@
 message-sim-teknopar is a Javascript application that enables the user to select messages from a predetermined pool of messages and push selected messages to a table.
 The table can then be saved as a PDF file or XLSX file.
 
+# startup
+The application must be started using http-server
+to start http server
+  1. clone the application
+  2. go to the application directory
+  3. run http-server .
+
+npm install http-server
+
+
 # Used Libraries
 1. html2pdf to save the table as a pdf file
 2. XLSX library to save the table as an XLSX file
